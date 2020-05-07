@@ -6,13 +6,13 @@ class StringUtil:
         super().__init__()
         self.exclude_char = r'県外'
 
-    def exclude_outside(self, full_with_str):
+    def exclude_outside(self, full_with_str: str):
         if re.search(self.exclude_char, full_with_str):
             return False
         else:
             return True
 
-    def is_duplicate_data(self, number_char):
+    def is_duplicate_data(self, number_char: str):
         check = re.search(r',', number_char)
         if check is None:
             return False, number_char

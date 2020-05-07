@@ -38,22 +38,15 @@ class TestTimeUtil:
         iso_format = tmu_object.convertToAD('令和', 2, 4, 29)
         assert iso_format == "2020-04-29T00:00:00+09:00"
 
-    def test_convertToAD2020_ISO(self, tmu_object):
-        iso_format = tmu_object.convertToAD2020(4, 3)
-        assert iso_format == "2020-04-03T00:00:00+09:00"
+    @pytest.mark.parametrize("string_format, expected", [(True, "2020-04-03T00:00:00+09:00"), (False, datetime.datetime(2020, 4, 3, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(0, 32400), 'JST')))])
+    def test_convertToAD2020(self, tmu_object, string_format, expected):
+        result = tmu_object.convertToAD2020(4, 3, string_format=string_format)
+        assert result == expected
 
-    def test_convertToAD2020_Not_ISO(self, tmu_object):
-        datetime_format = tmu_object.convertToAD2020(4, 3, string_format=False)
-        assert datetime_format == datetime.datetime(
-            2020, 4, 3, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(0, 32400), 'JST'))
-
-    def test_executeConvert(self, tmu_object):
-        result = tmu_object.executeConvert('令和2年10月23日')
-        assert result == "2020-10-23T00:00:00+09:00"
-
-    def test_executeConvert_None(self, tmu_object):
-        result = tmu_object.executeConvert('大正2年10月23日')
-        assert result == ''
+    @pytest.mark.parametrize("input, expected", [('令和2年10月23日', "2020-10-23T00:00:00+09:00"), ('大正2年10月23日', '')])
+    def test_convert_wareki2ad(self, tmu_object, input, expected):
+        result = tmu_object.convert_wareki2ad(input)
+        assert result == expected
 
     @pytest.mark.parametrize(
         "pattern, end, start, need_day, expected", [

@@ -1,7 +1,7 @@
 from src.lib.json_checker import JsonChecker
 
 
-def getStaticsDataDict(scr, table, comments, update_datetime):
+def get_statics_dict(scr, table, comments, update_datetime):
     res_dict = scr.parseContactsTable(table)
 
     # jsonへの格納

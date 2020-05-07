@@ -57,7 +57,7 @@ def getPatientDict(index_html, scr, update_datetime):
     # convertの実行
     pathOp.createPath('text')
     convert_txt = PdfParser()
-    convert_txt.executeConvert()
+    convert_txt.convert_all_files()
 
     # テキストからjsonの作成
     parser = TextParser()

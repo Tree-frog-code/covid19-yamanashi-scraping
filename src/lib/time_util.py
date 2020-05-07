@@ -58,7 +58,7 @@ class TimeUtil:
         else:
             return result
 
-    def executeConvert(self, datetime_string):
+    def convert_wareki2ad(self, datetime_string):
         wareki, other = self.getWareki(datetime_string)
         if wareki is not None:
             y, m, d = self.getYMD(other)

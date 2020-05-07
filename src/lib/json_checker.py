@@ -6,12 +6,12 @@ class JsonChecker:
     def __init__(self):
         pass
 
-    def read_json(self, path):
+    def read_json(self, path: str):
         with open(path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         return data
 
-    def exclude_date_key(self, obj):
+    def exclude_date_key(self, obj: dict):
         return_obj = {}
         for key in obj.keys():
             print(key)
@@ -36,7 +36,7 @@ class JsonChecker:
 
         return before_max['日付'] == after_max['日付'] and before_max['小計'] == after_max['小計']
 
-    def exclude_zero_max_date(self, obj_list):
+    def exclude_zero_max_date(self, obj_list: list):
         nonzero_list = list(filter(lambda x: x['小計'] != 0, obj_list))
         nonzero_max = max(nonzero_list, key=lambda x: x['日付'])
         return obj_list[:obj_list.index(nonzero_max)+1]

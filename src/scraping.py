@@ -7,7 +7,7 @@ from src.lib.time_util import TimeUtil
 
 
 class Scraper:
-    def __init__(self, base):
+    def __init__(self, base=""):
         self.base = base
         self.time_util = TimeUtil()
 
@@ -39,8 +39,9 @@ class Scraper:
             # dayにpタグが付いているパターンがある
             correct_date = tmp.findAll('a')[-1]
             day_release = correct_date.getText()
-            ad_day_release = self.time_util.executeConvert(day_release.strip())
-            ad_day_proved = self.time_util.executeConvert(
+            ad_day_release = self.time_util.convert_wareki2ad(
+                day_release.strip())
+            ad_day_proved = self.time_util.convert_wareki2ad(
                 day_proved.text.strip())
 
             link = correct_date.get('href')
